@@ -3,7 +3,7 @@ class MunicipiosController < ApplicationController
 
   # GET /municipios or /municipios.json
   def index
-    @municipios = Municipio.all
+    @municipios = Municipio.all.eager_load(:estado)
   end
 
   # GET /municipios/1 or /municipios/1.json
@@ -22,39 +22,26 @@ class MunicipiosController < ApplicationController
   # POST /municipios or /municipios.json
   def create
     @municipio = Municipio.new(municipio_params)
-
-    respond_to do |format|
-      if @municipio.save
-        format.html { redirect_to municipio_url(@municipio), notice: "Municipio was successfully created." }
-        format.json { render :show, status: :created, location: @municipio }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @municipio.errors, status: :unprocessable_entity }
-      end
+    if @municipio.save
+      redirect_to municipio_url(@municipio), notice: "Municipio was successfully created."
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /municipios/1 or /municipios/1.json
   def update
-    respond_to do |format|
-      if @municipio.update(municipio_params)
-        format.html { redirect_to municipio_url(@municipio), notice: "Municipio was successfully updated." }
-        format.json { render :show, status: :ok, location: @municipio }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @municipio.errors, status: :unprocessable_entity }
-      end
+    if @municipio.update(municipio_params)
+      format.html { redirect_to municipio_url(@municipio), notice: "Municipio was successfully updated."
+    else
+      format.html { render :edit, status: :unprocessable_entity
     end
   end
 
   # DELETE /municipios/1 or /municipios/1.json
   def destroy
     @municipio.destroy
-
-    respond_to do |format|
-      format.html { redirect_to municipios_url, notice: "Municipio was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    redirect_to municipios_url, notice: "Municipio was successfully destroyed."
   end
 
   private

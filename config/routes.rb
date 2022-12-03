@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
+  root to: "auth#login"
+
   resources :municipes
   resources :municipios
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
 end

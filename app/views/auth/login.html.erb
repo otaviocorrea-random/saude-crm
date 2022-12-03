@@ -1,0 +1,23 @@
+<main class="form-signin w-100 m-auto">
+  <form>
+    <%= image_tag "logo.png", class: "mb-4", width: "90", height: "90" %>
+    <h1 class="h3 mb-3 fw-normal">Login</h1>
+
+    <div class="form-floating">
+      <input type="email" class="form-control" id="email" placeholder="nome@email.com">
+      <label for="email">E-mail</label>
+    </div>
+    <div class="form-floating">
+      <input type="password" class="form-control" id="password" placeholder="Senha">
+      <label for="password">Senha</label>
+    </div>
+
+    <div class="checkbox mb-3">
+      <label>
+        <input type="checkbox" value="remember-me"> Lembrar
+      </label>
+    </div>
+    <%= link_to "Entrar", municipes_path, class: "w-100 btn btn-lg btn-dark" %>
+    <p class="mt-5 mb-3 text-muted">© Otavio Corrêa - 2022</p>
+  </form>
+</main>

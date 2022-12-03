@@ -1,14 +1,33 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Municipios</h1>
-
-<div id="municipios">
-  <% @municipios.each do |municipio| %>
-    <%= render municipio %>
-    <p>
-      <%= link_to "Show this municipio", municipio %>
-    </p>
-  <% end %>
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">Gerenciar</h1>
+  <div class="btn-toolbar mb-2 mb-md-0">
+    <%= link_to "Adicionar", new_municipio_path, class: 'btn btn-sm btn-outline-secondary' %>
+  </div>
 </div>
 
-<%= link_to "New municipio", new_municipio_path %>
+<div class="table-responsive">
+  <table id="municipios" class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Nome</th>
+        <th scope="col">Cód. IBGE</th>
+        <th scope="col">Estado</th>
+        <th scope="col">#</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @municipios.each do |municipio| %>
+        <tr>
+          <td scope="row"><%= municipio.nome %></td>
+          <td scope="row"><%= municipio.codigo_ibge %></td>
+          <td scope="row"><%= municipio.estado.sigla %></td>
+          <td>
+            <%= link_to "Exibir", municipio %> | 
+            <%= link_to "Editar", edit_municipio_path(municipio) %> | 
+            <%= link_to "Excluir", municipio, method: :delete, data: { confirm: "Você tem certeza?" } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

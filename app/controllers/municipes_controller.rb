@@ -23,38 +23,26 @@ class MunicipesController < ApplicationController
   def create
     @municipe = Municipe.new(municipe_params)
 
-    respond_to do |format|
-      if @municipe.save
-        format.html { redirect_to municipe_url(@municipe), notice: "Municipe was successfully created." }
-        format.json { render :show, status: :created, location: @municipe }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @municipe.errors, status: :unprocessable_entity }
-      end
+    if @municipe.save
+      redirect_to municipe_url(@municipe), notice: "Municipe was successfully created."
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /municipes/1 or /municipes/1.json
   def update
-    respond_to do |format|
-      if @municipe.update(municipe_params)
-        format.html { redirect_to municipe_url(@municipe), notice: "Municipe was successfully updated." }
-        format.json { render :show, status: :ok, location: @municipe }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @municipe.errors, status: :unprocessable_entity }
-      end
+    if @municipe.update(municipe_params)
+      redirect_to municipe_url(@municipe), notice: "Municipe was successfully updated."
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
   # DELETE /municipes/1 or /municipes/1.json
   def destroy
     @municipe.destroy
-
-    respond_to do |format|
-      format.html { redirect_to municipes_url, notice: "Municipe was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    redirect_to municipes_url, notice: "Municipe was successfully destroyed."
   end
 
   private
