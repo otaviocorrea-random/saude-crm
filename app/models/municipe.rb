@@ -31,6 +31,8 @@ class Municipe < ApplicationRecord
 
   enum status: { inativo: 0, ativo: 1 }
 
+  mount_uploader :foto, Municipe::FotoUploader
+
   validates :nome_completo, presence: true
   validates :cpf, presence: true, uniqueness: true
   validates :cns, presence: true, uniqueness: true
