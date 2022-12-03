@@ -3,7 +3,7 @@ class MunicipiosController < ApplicationController
 
   # GET /municipios or /municipios.json
   def index
-    @municipios = Municipio.all.eager_load(:estado)
+    @municipios = Municipio.all.eager_load(:estado).paginate(page: params[:page])
   end
 
   # GET /municipios/1 or /municipios/1.json
@@ -32,9 +32,9 @@ class MunicipiosController < ApplicationController
   # PATCH/PUT /municipios/1 or /municipios/1.json
   def update
     if @municipio.update(municipio_params)
-      format.html { redirect_to municipio_url(@municipio), notice: "Municipio was successfully updated."
+      redirect_to municipio_url(@municipio), notice: "Municipio was successfully updated."
     else
-      format.html { render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_entity
     end
   end
 
