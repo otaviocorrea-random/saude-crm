@@ -1,22 +1,19 @@
 <%= form_with(model: municipio) do |form| %>
-  <% if municipio.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(municipio.errors.count, "error") %> prohibited this municipio from being saved:</h2>
+  <%= model_error_alert(municipio.errors) %>
 
-      <ul>
-        <% municipio.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div>
-    <%= form.label :nome, style: "display: block" %>
-    <%= form.text_field :nome %>
+  <div class="mb-3">
+    <%= form.label 'Nome da cidade', class: 'form-label' %>
+    <%= form.text_field :nome, class: 'form-control' %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="mb-3">
+    <%= form.label :estado_id, class: 'form-label' %>
+    <%= form.select :estado_id, Estado.all.collect { |estado| [estado.nome, estado.id] }, {}, class: 'form-select' %>
+  </div>
+
+  <div class="d-flex justify-content-end mt-3">
+    <%= form.submit 'Salvar', class: 'btn btn-primary' %>
   </div>
 <% end %>
+
+

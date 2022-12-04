@@ -45,6 +45,15 @@
     </div>
   </div>
 
+  <div class="row mb-3">
+    <div class="col-md-12>
+      <%= form.label :municipio, class: 'form-label' %>
+      <%= form.text_field :municipio_id, class: 'form-control', list: 'lista_municipios', value: municipe&.municipio&.nome_listagem_formatado || '' %>
+      <%= datalist_municipios %>
+      <span class="blockquote-footer">Não encontrou seu município? <%= link_to 'Cadastre-o aqui', new_municipio_path %></span>
+    </div>
+  </div>
+
   <div class="d-flex justify-content-end mt-3">
     <%= form.submit 'Salvar', class: 'btn btn-primary' %>
   </div>

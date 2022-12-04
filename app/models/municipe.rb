@@ -41,4 +41,8 @@ class Municipe < ApplicationRecord
   validates :telefone, presence: true
   validates :foto, presence: true
   validates :status, presence: true, inclusion: { in: statuses.keys }
+
+  def data_nascimento_formatada
+    data_nascimento.strftime('%d/%m/%Y')
+  end
 end

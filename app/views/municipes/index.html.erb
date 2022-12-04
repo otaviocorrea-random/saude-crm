@@ -1,15 +1,39 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-<h1 class="h2">Gerenciar</h1>
-<div class="btn-toolbar mb-2 mb-md-0">
-  <%= link_to "Adicionar", new_municipe_path, class: 'btn btn-sm btn-outline-secondary' %>
-</div>
+  <h1 class="h2">Gerenciar</h1>
+  <div class="btn-toolbar mb-2 mb-md-0">
+    <%= link_to "Adicionar", new_municipe_path, class: 'btn btn-sm btn-outline-secondary' %>
+  </div>
 </div>
 
-<div id="municipes">
-  <% @municipes.each do |municipe| %>
-    <%= render municipe %>
-    <p>
-      <%= link_to "Show this municipe", municipe %>
-    </p>
-  <% end %>
+<div class="table-responsive">
+  <table id="municipes" class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Nome</th>
+        <th scope="col">CPF</th>
+        <th scope="col">CNS</th>
+        <th scope="col">Nascimento</th>
+        <th scope="col">Município</th>
+        <th scope="col">#</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @municipes.each do |municipe| %>
+        <tr>
+          <td scope="row"><%= municipe.nome_completo %></td>
+          <td scope="row"><%= municipe.cpf %></td>
+          <td scope="row"><%= municipe.cns %></td>
+          <td scope="row"><%= municipe.data_nascimento_formatada %></td>
+          <td scope="row"><%= municipe.municipio.nome %></td>
+          <td>
+            <%= link_to "Exibir", municipe %> | 
+            <%= link_to "Editar", edit_municipe_path(municipe) %> | 
+            <%= link_to "Excluir", municipe, method: :delete, data: { confirm: "Você tem certeza?" } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
+
+<%= will_paginate @municipes %>

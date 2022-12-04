@@ -1,42 +1,36 @@
-<div id="<%= dom_id municipe %>">
-  <p>
-    <strong>Nome completo:</strong>
-    <%= municipe.nome_completo %>
-  </p>
-
-  <p>
-    <strong>Cpf:</strong>
-    <%= municipe.cpf %>
-  </p>
-
-  <p>
-    <strong>Cns:</strong>
-    <%= municipe.cns %>
-  </p>
-
-  <p>
-    <strong>Email:</strong>
-    <%= municipe.email %>
-  </p>
-
-  <p>
-    <strong>Data nascimento:</strong>
-    <%= municipe.data_nascimento %>
-  </p>
-
-  <p>
-    <strong>Telefone:</strong>
-    <%= municipe.telefone %>
-  </p>
-
-  <p>
-    <strong>Fot:</strong>
-    <%= municipe.foto %>
-  </p>
-
-  <p>
-    <strong>Status:</strong>
-    <%= municipe.status %>
-  </p>
-
+<div id="<%= dom_id municipe %>" class="row">
+  <div class="col-md-8">
+    <%= render_field_data('Nome completo', municipe.nome_completo ) %>
+    <div class="row">
+      <div class="col-md-8">
+        <%= render_field_data('Município', "#{municipe.municipio.nome}/#{municipe.municipio.estado.sigla}") %>
+      </div>
+      <div class="col-md-4">
+        <%= render_field_data('Status', municipe.status ) %>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-md-4">
+        <%= render_field_data('CPF', municipe.cpf ) %>
+      </div>
+      <div class="col-md-4">
+        <%= render_field_data('CNS', municipe.cns ) %>
+      </div>
+      <div class="col-md-4">
+        <%= render_field_data('Nascimento', municipe.data_nascimento_formatada ) %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8">
+        <%= render_field_data('E-mail', municipe.email ) %>
+      </div>
+      <div class="col-md-4">
+        <%= render_field_data('Telefone', municipe.telefone ) %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <%= render_field_data('Foto', "<img src='#{municipe.foto.url}' class='img-fluid rounded-circle' alt='Foto de perfil'>" ) %>
+  </div>
 </div>

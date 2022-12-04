@@ -23,4 +23,24 @@ module ApplicationHelper
     end
     super *[collection_or_options, options].compact
   end
+
+  def render_field_data(title, content)
+    "<div class=\"card mb-3\">
+      <div class=\"card-header\">
+        #{title}
+      </div>
+      <div class=\"card-body\">
+        <blockquote class=\"blockquote mb-0\">
+          <p>#{content}</p>
+        </blockquote>
+      </div>
+    </div>".html_safe
+  end
+
+  def datalist_municipios
+    html = "<datalist id=\"lista_municipios\">"
+    html += options_for_select(Municipio.all.eager_load(:estado).map { | municipio | municipio.nome_listagem_formatado })
+    html += "</datalist>"
+    html.html_safe
+  end
 end

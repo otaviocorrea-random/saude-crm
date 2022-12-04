@@ -23,7 +23,11 @@ class Municipio < ApplicationRecord
   belongs_to :estado
   has_many :municipes
 
-  validates :nome, presence: true
+  validates :nome, presence: true, uniqueness: { scope: :estado }
   validates :estado, presence: true
   validates :codigo_ibge, uniqueness: true, if: -> { codigo_ibge.present? }
+
+  def nome_listagem_formatado
+    "#{id} - #{nome}/#{estado.sigla}"
+  end
 end

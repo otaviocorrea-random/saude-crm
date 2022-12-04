@@ -3,7 +3,7 @@ class MunicipesController < ApplicationController
 
   # GET /municipes or /municipes.json
   def index
-    @municipes = Municipe.all
+    @municipes = Municipe.all.eager_load(:municipio).paginate(page: params[:page])
   end
 
   # GET /municipes/1 or /municipes/1.json
@@ -53,6 +53,6 @@ class MunicipesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def municipe_params
-      params.require(:municipe).permit(:nome_completo, :cpf, :cns, :email, :data_nascimento, :telefone, :foto, :status)
+      params.require(:municipe).permit(:nome_completo, :cpf, :cns, :email, :data_nascimento, :telefone, :foto, :status, :municipio_id)
     end
 end
