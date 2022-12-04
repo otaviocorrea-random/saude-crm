@@ -26,6 +26,8 @@
 #  fk_rails_...  (municipio_id => municipios.id)
 #
 class Municipe < ApplicationRecord
+  include NormalizeCpf
+
   belongs_to :municipio
   has_one :endereco
 
@@ -34,9 +36,9 @@ class Municipe < ApplicationRecord
   mount_uploader :foto, Municipe::FotoUploader
 
   validates :nome_completo, presence: true
-  validates :cpf, presence: true, uniqueness: true
+  validates :cpf, presence: true, cpf: true, uniqueness: true
   validates :cns, presence: true, uniqueness: true
-  validates :email, presence: true, uniqueness: true
+  validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :data_nascimento, presence: true, inclusion: { in: 120.years.ago..Date.today }
   validates :telefone, presence: true
   validates :foto, presence: true
