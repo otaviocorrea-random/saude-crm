@@ -1,3 +1,4 @@
+
 module ApplicationHelper
   def model_error_alert(errors)
     return '' if errors.blank?
@@ -11,5 +12,15 @@ module ApplicationHelper
     html += "</ul>"
     html += "</div>"
     html.html_safe
+  end
+
+  def will_paginate(collection_or_options = nil, options = {})
+    if collection_or_options.is_a? Hash
+      options, collection_or_options = collection_or_options, nil
+    end
+    unless options[:renderer]
+      options = options.merge :renderer => WillPaginate::BootstrapLinkRenderer
+    end
+    super *[collection_or_options, options].compact
   end
 end
