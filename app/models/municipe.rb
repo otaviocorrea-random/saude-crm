@@ -37,7 +37,7 @@ class Municipe < ApplicationRecord
 
   validates :nome_completo, presence: true
   validates :cpf, presence: true, cpf: true, uniqueness: true
-  validates :cns, presence: true, uniqueness: true
+  validates :cns, presence: true, cns: true, uniqueness: true
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :data_nascimento, presence: true, inclusion: { in: 120.years.ago..Date.today }
   validates :telefone, presence: true
