@@ -13,9 +13,7 @@ class CnsValidator < ActiveModel::EachValidator
   
   def weighted_sum(cns)
     total = 0
-    cns.chars.each_with_index do |char, index|
-      total += (char.to_i * (15 - index))
-    end
+    cns.chars.each_with_index { |char, index| total += (char.to_i * (15 - index)) }
     total
   end
 end
