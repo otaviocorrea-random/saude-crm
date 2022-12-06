@@ -1,0 +1,17 @@
+require 'rails_helper'
+
+RSpec.describe "/plant_species", type: :request do
+  
+  describe "GET /index" do
+    context 'success' do
+      let!(:municipio_params){ create(:municipio) }
+      let!(:request){
+        get municipios_url
+      }
+
+      it "renders a successful response status" do
+        expect(response).to have_http_status(:ok)
+      end
+    end
+  end
+end

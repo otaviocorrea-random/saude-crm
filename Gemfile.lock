@@ -124,6 +124,10 @@ GEM
     et-orbi (1.2.7)
       tzinfo
     execjs (2.8.1)
+    factory_bot (6.2.1)
+      activesupport (>= 5.0.0)
+    faker (2.23.0)
+      i18n (>= 1.8.11, < 2)
     ffi (1.15.5)
     fugit (1.8.0)
       et-orbi (~> 1, >= 1.2.7)
@@ -299,6 +303,8 @@ DEPENDENCIES
   carrierwave (>= 3.0.0.beta, < 4.0)
   debug
   documentos_br (~> 1.1)
+  factory_bot (~> 6.2)
+  faker (~> 2.22)
   importmap-rails
   jbuilder
   pg (~> 1.1)
