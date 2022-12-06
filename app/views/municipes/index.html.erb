@@ -4,6 +4,9 @@
     <%= link_to "Adicionar", new_municipe_path, class: 'btn btn-sm btn-outline-secondary' %>
   </div>
 </div>
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <%= render "filters_form" %>
+</div>
 
 <div class="table-responsive">
   <table id="municipes" class="table table-hover">

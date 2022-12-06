@@ -3,7 +3,8 @@ class MunicipiosController < ApplicationController
 
   # GET /municipios or /municipios.json
   def index
-    @municipios = Municipio.all.eager_load(:estado).paginate(page: params[:page])
+    @municipios = Municipio.all.eager_load(:estado)
+    set_filters
   end
 
   # GET /municipios/1 or /municipios/1.json
@@ -53,5 +54,11 @@ class MunicipiosController < ApplicationController
     # Only allow a list of trusted parameters through.
     def municipio_params
       params.require(:municipio).permit(:nome, :estado_id)
+    end
+
+    def set_filters
+      @municipios = @municipios.where('municipios.nome ILIKE ?', "%#{params[:nome]}%") if params[:nome].present?
+      @municipios = @municipios.where(estado_id: params[:estado_id]) if params[:estado_id].present?
+      @municipios = @municipios.paginate(page: params[:page])
     end
 end

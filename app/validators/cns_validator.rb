@@ -1,7 +1,7 @@
 
 class CnsValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
-    return if valid_cns?(value)
+    return if valid_cns?(value.to_s)
     record.errors.add(attribute.to_sym, 'não é válido')
   end
 

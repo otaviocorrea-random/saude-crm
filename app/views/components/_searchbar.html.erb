@@ -1,5 +1,5 @@
 
-<input id="searchbar" class="form-control form-control-dark w-100 rounded-0 border-0" type="text" placeholder="Buscar por Nome ou E-mail do contato..." value="<%=params[:search]%>" aria-label="Search">
+<input id="searchbar" class="form-control form-control-dark w-100 rounded-0 border-0" type="text" placeholder="Buscar por Nome do municipe..." value="<%=params[:nome_completo]%>" aria-label="Search">
 
 <script>
   const searchbar = document.getElementById('searchbar');
@@ -7,7 +7,7 @@
     let key = e.which || e.keyCode;
     if (key == 13) { 
       let search = searchbar.value;
-      window.location.href = `/business_contacts?search=${search}`;
+      window.location.href = `/municipes?nome_completo=${search}`;
     }
   });
 </script>

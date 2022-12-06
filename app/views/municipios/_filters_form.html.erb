@@ -1,0 +1,16 @@
+
+
+<%= form_with url: municipios_path, method: :get do |f| %>
+  <div class="row">
+    <div class="col-md-6">
+      <%= f.text_field :nome, class: 'form-control', value: params[:nome] || '', placeholder: 'Nome do municipio'  %>
+    </div>
+    <div class="col-md-3">
+      <%= f.select :estado_id, ([['Todos', nil]] + Estado.all.map { |estado| [estado.sigla, estado.id] }), { selected: params[:estado_id] }, class: 'form-select' %>
+    </div>
+    
+    <div class="col-md-2">
+      <%= f.submit "Buscar", class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>

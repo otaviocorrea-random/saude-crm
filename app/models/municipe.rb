@@ -27,9 +27,11 @@
 #
 class Municipe < ApplicationRecord
   include NormalizeCpf
+  include NormalizeTelefone
 
   belongs_to :municipio
-  has_one :endereco
+  has_one :endereco, dependent: :destroy
+  accepts_nested_attributes_for :endereco
 
   enum status: { inativo: 0, ativo: 1 }
 
@@ -40,9 +42,17 @@ class Municipe < ApplicationRecord
   validates :cns, presence: true, cns: true, uniqueness: true
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :data_nascimento, presence: true, inclusion: { in: 120.years.ago..Date.today }
-  validates :telefone, presence: true
+  validates :telefone, presence: true, uniqueness: true, length: { is: 13 }
   validates :foto, presence: true
   validates :status, presence: true, inclusion: { in: statuses.keys }
+
+  scope :filter_by_endereco, ->(endereco) {
+    joins(:endereco).where('enderecos.logradouro ILIKE ?', "%#{endereco}%")
+    .or(where('enderecos.complemento ILIKE ?', "%#{endereco}%"))
+    .or(where('enderecos.cep ILIKE ?', "%#{endereco}%"))
+  }
+
+  scope :filter_by_municipio, ->(nome_municipio) { joins(:municipio).where('municipios.nome ILIKE ?', "%#{nome_municipio}%") }
 
   def data_nascimento_formatada
     data_nascimento.strftime('%d/%m/%Y')

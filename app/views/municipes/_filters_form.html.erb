@@ -1,0 +1,24 @@
+
+
+<%= form_with url: municipes_path, method: :get do |f| %>
+  <div class="row">
+    <div class="col-md-2">
+      <%= f.text_field :nome_completo, class: 'form-control', value: params[:nome_completo] || '', placeholder: 'Nome'  %>
+    </div>
+    <div class="col-md-2">
+      <%= f.text_field :cpf, class: 'form-control mask_cpf', value: params[:cpf] || '', placeholder: 'CPF'  %>
+    </div>
+    <div class="col-md-2">
+      <%= f.text_field :cns, class: 'form-control mask_cns', value: params[:cns] || '', placeholder: 'CNS'  %>
+    </div>
+    <div class="col-md-2">
+      <%= f.text_field :municipio, class: 'form-control', value: params[:municipio] || '', placeholder: 'Municipio'  %>
+    </div>
+    <div class="col-md-2">
+      <%= f.text_field :endereco, class: 'form-control', value: params[:endereco] || '', placeholder: 'Endereço'  %>
+    </div>
+    <div class="col-md-2">
+      <%= f.submit "Buscar", class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>
