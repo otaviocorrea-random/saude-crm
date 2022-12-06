@@ -1,13 +1,16 @@
 <div id="<%= dom_id municipio %>">
   <%= render_field_data('Município', municipio.nome) %>
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-3">
       <%= render_field_data('Estado', municipio.estado.nome ) %>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
       <%= render_field_data('Sigla', municipio.estado.sigla ) %>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
+      <%= render_field_data('Cód. IBGE', municipio.codigo_ibge ) %>
+    </div>
+    <div class="col-md-3">
       <%= render_field_data('Municípes', municipio.municipes.count ) %>
     </div>
   </div>

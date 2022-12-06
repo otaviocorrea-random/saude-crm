@@ -53,7 +53,7 @@ class MunicipiosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def municipio_params
-      params.require(:municipio).permit(:nome, :estado_id)
+      params.require(:municipio).permit(:nome, :estado_id, :codigo_ibge)
     end
 
     def set_filters
