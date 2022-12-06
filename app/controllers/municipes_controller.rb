@@ -23,9 +23,10 @@ class MunicipesController < ApplicationController
   # POST /municipes or /municipes.json
   def create
     @municipe = Municipe.new(municipe_params)
-    @municipe.build_endereco
+    @municipe.build_endereco if @municipe.endereco.nil?
 
     if @municipe.save
+      Municipes::Notifications::WelcomeWorker.perform_async(@municipe.id)
       redirect_to municipe_url(@municipe), notice: "Municipe was successfully created."
     else
       render :new, status: :unprocessable_entity
@@ -34,8 +35,10 @@ class MunicipesController < ApplicationController
 
   # PATCH/PUT /municipes/1 or /municipes/1.json
   def update
+    old_status = @municipe.status
     @municipe.build_endereco if @municipe.endereco.nil?
     if @municipe.update(municipe_params)
+      Municipes::Notifications::UpdateStatusWorker.perform_async(@municipe.id) if old_status != @municipe.status
       redirect_to municipe_url(@municipe), notice: "Municipe was successfully updated."
     else
       render :edit, status: :unprocessable_entity
