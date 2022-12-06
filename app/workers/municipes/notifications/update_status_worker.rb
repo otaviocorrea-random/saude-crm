@@ -1,6 +1,6 @@
 class Municipes::Notifications::UpdateStatusWorker
   include Sidekiq::Worker
-  queue :notifications
+  queue_as :notifications
 
   def perform(municipe_id)
     municipe = Municipe.find(municipe_id)
